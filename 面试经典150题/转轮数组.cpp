@@ -26,21 +26,20 @@ public:
         }
     }*/
 
+/*
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
         int rk1 = k % n;
         int rk2 = rk1;
         int count = 0;
         int tag = 0;
-        if(n == 0 || k == 0)
+        if(n == 1 || k == 0)
         	return;
         while(true){
             count++;
             int tem = nums[tag];
             nums[tag] = nums[(tag + rk2) % n];
             nums[(tag + rk2) % n] = tem;
-//            cout<< count<<" ";
-//			test(nums);
             rk2 += rk1;
             rk2 = rk2 % n;
             if(count == n - 1)
@@ -48,8 +47,23 @@ public:
             if(rk2 == 0)
             	tag++;
         }
-        
     }
+    */
+    
+    void temReverse(vector<int>& nums, int low, int up){
+    	while(low < up){
+    		int tem = nums[low];
+    		nums[low++] = nums[up];
+    		nums[up--] = tem;
+		}
+	}
+    
+    void rotate(vector<int>& nums, int k){
+    	int n = nums.size();
+		temReverse(nums, 0, n - 1);
+		temReverse(nums, 0, k % n - 1);
+		temReverse(nums, k % n, n - 1); 
+	}
 };
 
 
