@@ -1,5 +1,6 @@
 class Solution {
 public:
+/*
     long long maximumOr(vector<int>& nums, int k)
     {
         long long res = 0;
@@ -18,6 +19,23 @@ public:
             long long tem = prefix[i] | suffix[i] | ((long long)nums[i] << k);
             res = max(res, tem);
         }
+        return res;
+    }
+*/
+    long long maximumOr(vector<int>& nums, int k)
+    {
+        long long res = 0;
+        long long oneBits = 0, multiBits = 0;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            multiBits = multiBits | (oneBits & nums[i]);
+            oneBits = oneBits | nums[i];
+        }
+        for(int i = 0; i < nums.size(); i++)
+        {
+            res = max(res, multiBits | (nums[i] << k) | (nums[i] ^ oneBits));
+        }
+
         return res;
     }
 };
